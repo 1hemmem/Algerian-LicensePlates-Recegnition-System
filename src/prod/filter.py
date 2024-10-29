@@ -78,7 +78,7 @@ def preprocess_image(image):
     return image
 
 
-dir = "../../output/1"
+dir = "../../output/3"
 
 ls = os.listdir(dir)
 model = YOLO("../../runs-20240920T214004Z-001/runs/detect/train2/weights/best.pt")

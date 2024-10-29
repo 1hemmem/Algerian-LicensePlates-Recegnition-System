@@ -2,6 +2,12 @@ import os
 import random
 import shutil
 
+"""This code only run once to change bounding box formating 
+from normal format: [x_min, y_min, x_max, y_max]
+to yolo format: [x_center, y_center, width, height]
+"""
+
+
 list = os.listdir("./Detection/Labels/")
 list = [value.replace(".txt", "") for value in list]
 

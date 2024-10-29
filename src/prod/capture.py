@@ -18,7 +18,6 @@ cap = cv2.VideoCapture("/home/hemmem/Downloads/Telegram Desktop/VID_20241005_174
 print("loaded")
 out = cv2.VideoWriter('output.mp4', fourcc,30,(3840 , 2160))
 
-# cap = cv2.VideoCapture("/home/hemmem/Downloads/Telegram Desktop/video_2024-10-05_18-38-50 (2).mp4")
 # Initialize variables for tracking
 track_history = {}
 next_id = 1
@@ -31,8 +30,6 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
-    print("here")
-    # Run vehicle detection model
     results = model(frame, conf=0.7)
 
     current_detections = []
@@ -73,7 +70,6 @@ while True:
                         absolute_lp_y2 = y1 + lp_y2
 
     
-    # Improved tracking algorithm
     new_track_history = {}
     unmatched_detections = current_detections.copy()
 
@@ -108,20 +104,7 @@ while True:
         utils.save_bounding_box_image(
             frame, best_detection, track_id, len(track), isPlate=False
         )
-        # if lp_conf is not None and lp_conf >= 0.6:
-        #     utils.save_bounding_box_image(
-        #         frame,
-        #         [
-        #             absolute_lp_x1,
-        #             absolute_lp_y1,
-        #             absolute_lp_x2,
-        #             absolute_lp_y2,
-        #         ],
-        #         track_id,
-        #         len(track),
-        #         True,
-        #     )
-
+    
     # Add new tracks for unmatched detections
     for detection in unmatched_detections:
         new_track_history[next_id] = deque([detection], maxlen=max_track_length)
